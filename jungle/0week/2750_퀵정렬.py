@@ -5,23 +5,24 @@ n = int(input())
 a = []
 
 
-def quick_sort(a, start, end):
-    if start >= end:
-        return
-    pivot = start
-    left = start + 1
-    right = end
-    while left <= right:
-        while left <= end and a[left] <= a[pivot]:
-            left += 1
-        while right > start and a[right] >= a[pivot]:
-            right -= 1
-        if left > right:
-            a[right], a[pivot] = a[pivot], a[right]
-        else:
-            a[left], a[right] = a[right], a[left]
-    quick_sort(a, start, right - 1)
-    quick_sort(a, right + 1, end)
+def quick_sort(a, left, right):
+    pl = left
+    pr = right
+    x = a[(left + right) // 2]
+
+    while pl <= pr:
+        while a[pl] < x:
+            pl += 1
+        while a[pr] > x:
+            pr -= 1
+        if pl <= pr:
+            a[pl], a[pr] = a[pr], a[pl]
+            pl += 1
+            pr -= 1
+    if left < pr:
+        quick_sort(a, left, pr)
+    if pl < right:
+        quick_sort(a, pl, right)
 
 
 for i in range(n):
