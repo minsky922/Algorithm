@@ -9,7 +9,7 @@ travel_cost = [list(map(int, input().split())) for _ in range(n)]  # 도시간 �
 all = permutations(
     list(range(n))
 )  # 순열 생성 - 가능한 도시 방문 순서 (0,1,2,3)(0,1,3,2)(0,2,1,3)...
-
+print(all)
 min_cost = float("inf")
 for via in all:
     cost = 0  # 총 이동 비용

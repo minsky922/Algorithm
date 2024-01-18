@@ -3,14 +3,14 @@ import sys
 input = sys.stdin.readline
 
 
-def dac(a, b, c):
+def d(a, b, c):
     if b == 1:
         return a % c
     elif b % 2 == 0:
-        return (dac(a, b // 2, c) ** 2) % c
+        return (d(a, b // 2, c) ** 2) % c
     else:
-        return ((dac(a, b // 2, c) ** 2) * a) % c
+        return ((d(a, b // 2, c) ** 2) * a) % c
 
 
 a, b, c = map(int, input().split())
-print(dac(a, b, c))
+print(d(a, b, c))
