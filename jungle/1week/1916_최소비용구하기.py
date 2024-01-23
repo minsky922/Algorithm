@@ -2,38 +2,41 @@ import heapq
 import sys
 
 input = sys.stdin.readline
+INF = int(1e9)
 
 n = int(input())
 m = int(input())
-
+# 각 노드에 연결되어 있는 노드에 대한 정보를 담는 리스트 만들기
 graph = [[] for i in range(n + 1)]
 
+distance = [INF] * (n + 1)
+# 모든 간선 정보를 입력받기
 for _ in range(m):
-    a, b, cost = map(int, input().split())
-    graph[a].append([b, cost])
+    a, b, c = map(int, input().split())
+    graph[a].append((b, c))
 
 start, end = map(int, input().split())
 
 
-def dijkstra(graph, start):
-    distances = [int(1e9)] * (n + 1)
-    distances[start] = 0
-    queue = []
-    heapq.heappush(queue, [distances[start], start])
-
-    while queue:
-        dist, node = heapq.heappop(queue)
-
-        if distances[node] < dist:
+def dijkstra(start):
+    q = []
+    # 시작 노드로 가기 위한 최단 경로는 0으로 설정하여 큐에 삽입
+    heapq.heappush(q, (0, start))
+    distance[start] = 0
+    while q:
+        # 가장 최단 거리가 짧은 노드에 대한 정보 꺼내기
+        dist, now = heapq.heappop(q)
+        # 현재 노드가 이미 처리된 적이 있는 노드라면 무시
+        if distance[now] < dist:
             continue
+        # 현재 노드와 연결된 다른 인접한 노드들을 확인
+        for i in graph[now]:
+            cost = dist + i[1]
+            # 현재 노드를 거쳐서, 다른 노드로 이동하는 거리가 더 짧은 경우
+            if cost < distance[i[0]]:
+                distance[i[0]] = cost
+                heapq.heappush(q, (cost, i[0]))
 
-        for next_node, next_dist in graph[node]:
-            distance = dist + next_dist
-            if distance < distances[next_node]:
-                distances[next_node] = distance
-                heapq.heappush(queue, [distance, next_node])
-    return distances
 
-
-dist_start = dijkstra(graph, start)
-print(dist_start[end])
+dijkstra(start)
+print(distance[end])
