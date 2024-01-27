@@ -1,19 +1,15 @@
-N, K = map(int, input().split())  # N과 K를 입력받음
-
-weight = [0] * (N + 1)
-value = [0] * (N + 1)
-d = [[0] * (K + 1) for _ in range(N + 1)]
-
-# 무게와 가치 정보를 입력받음
-for i in range(1, N + 1):
-    weight[i], value[i] = map(int, input().split())
-
-# 동적 프로그래밍을 이용하여 문제 해결
-for i in range(1, N + 1):
-    for j in range(1, K + 1):
-        if j >= weight[i]:
-            d[i][j] = max(d[i - 1][j], d[i - 1][j - weight[i]] + value[i])
+n, k = map(int, input().split())
+bag = [[0] * (k + 1) for _ in range(n + 1)]
+item = [[0, 0]]
+for i in range(1, n + 1):
+    item.append(list(map(int, input().split())))
+for i in range(1, n + 1):
+    for j in range(1, k + 1):
+        w = item[i][0]
+        v = item[i][1]
+        if j < w:
+            bag[i][j] = bag[i - 1][j]
         else:
-            d[i][j] = d[i - 1][j]
-
-print(d[N][K])
+            # bag[i][j] = max(bag[이전 물건][현재 가방 무게], 현재 물건 가치 + bag[이전 물건][현재 가방 무게 - 현재 물건 무게])
+            bag[i][j] = max(bag[i - 1][j], bag[i - 1][j - w] + v)
+print(bag[n][k])
