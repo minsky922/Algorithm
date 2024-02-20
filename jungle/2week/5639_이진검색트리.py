@@ -4,7 +4,7 @@ sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 # 전위 순회한 결과 입력
 preOrder = []
-while True:
+while True:  # 값입력없이 엔터 눌렸을때 break
     try:
         preOrder.append(int(input()))
     except:
