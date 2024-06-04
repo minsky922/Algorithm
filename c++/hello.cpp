@@ -1,5 +1,6 @@
 #include <iostream>
 
+//test
 typedef struct Animal
 {
     char name[30]; // 이름
