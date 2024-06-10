@@ -39,7 +39,7 @@ def bfs(x,y,shark_size):
                     distance[nx][ny] = distance[cur_x][cur_y] + 1
                     if graph[nx][ny] < shark_size and graph[nx][ny] != 0:
                         temp.append((nx,ny,distance[nx][ny]))
-    # 거리가 가까운 물고기가 많다면, 가장 위에 잇는 물고기, 그런 물고기가 여러마리라면 가장 왼쪽물고기
+    # 거리 ,x좌표 , y좌표 순 우선순위
     return sorted(temp, key=lambda x: (-x[2],-x[0],-x[1]))
 
 result=0
