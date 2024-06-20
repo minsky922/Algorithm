@@ -1,28 +1,27 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
-int n, total = 0;
-int row[15];
 
-bool check(int x) {
-  for (int i = 0; i < x; i++) {
-    if (row[x] == row[i] || abs(row[x] - row[i]) == abs(x - i)) return false;
-  }
-  return true;
-}
-void nqueen(int x) {
-  if (x == n)
-    total++;
-  else {
-    for (int i = 0; i < n; i++) {
-      row[x] = i;
-      if (check(x)) nqueen(x + 1);
+
+void hanoi(int n,int start,int end,int sub){
+    if (n==1) {cout<<start<<' '<<end<<"\n";}
+    else{
+    hanoi(n-1,start,sub,end);
+    cout<<start<<' '<<end<<"\n";
+    hanoi(n-1,sub,end,start);
     }
-  }
 }
 
-int main() {
-  cin >> n;
-  nqueen(0);
-  cout << total;
-  return 0;
+int main(){
+    int n;
+    cin>>n;
+    string a = to_string(pow(2,n));
+    int x = a.find('.');
+    a = a.substr(0,x);
+    a[a.length()-1] -=1;
+    cout<< a <<"\n";
+    if (n<=20){
+    hanoi(n,1,3,2);
+    }
+    return 0;
 }
