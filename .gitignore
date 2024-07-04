@@ -6,7 +6,7 @@
 *.d
 
 .gitignore
-.vscode
+.vscode/
 output/
 
 # Compiled Object files
