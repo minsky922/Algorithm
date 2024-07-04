@@ -5,6 +5,8 @@
 # Prerequisites
 *.d
 
+.gitignore
+.vscode
 output/
 
 # Compiled Object files
