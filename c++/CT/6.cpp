@@ -19,7 +19,7 @@ vector<int> solution(int N, vector<int> stages) {
 
     fail[stages[i]]++;
   }
-  vector<pair<int, float>> failRatio(N);
+  vector<pair<int, float>> failRatio(N);  // 스테이지 번호, 실패율
   for (int i = 0; i < N; i++) {
     failRatio[i].first = i + 1;
     if (challenger[i + 1] == 0)
