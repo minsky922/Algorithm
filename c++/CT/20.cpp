@@ -15,3 +15,15 @@ string solution(vector<string> participant, vector<string> completion) {
   }
   return ph.begin()->first;
 }
+
+string solution(vector<string> participant, vector<string> completion) {
+  unordered_map<string, int> ph;
+  for (const auto& name : participant) {
+    ph[name]++;
+  }
+  for (const auto& name : completion) {
+    ph[name]--;
+    if (ph[name] == 0) ph.erase(name);
+  }
+  return ph.begin()->first;
+}
